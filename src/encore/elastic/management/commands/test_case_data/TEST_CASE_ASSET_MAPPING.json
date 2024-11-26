@@ -1,0 +1,58 @@
+[
+  {
+    "asset_unique_id": "TEST_HOST_A",
+    "asset_type": "hardware",
+    "asset_region": "test_env",
+    "parent_asset_unique_id": null,
+    "parent_asset_type": null
+  },
+  {
+    "asset_unique_id": "TEST_HOST_b",
+    "asset_type": "hardware",
+    "asset_region": "test_env",
+    "parent_asset_unique_id": "TEST_HOST_A",
+    "parent_asset_type": "hardware"
+  },
+  {
+    "asset_unique_id": "TEST_HOST_C",
+    "asset_type": "hardware",
+    "asset_region": "test_env",
+    "parent_asset_unique_id": "TEST_HOST_b",
+    "parent_asset_type": "hardware"
+  },
+  {
+    "asset_unique_id": "TEST_HOST_D",
+    "asset_type": "hardware",
+    "asset_region": "test_env",
+    "parent_asset_unique_id": "TEST_HOST_b",
+    "parent_asset_type": "hardware"
+  },
+  {
+    "asset_unique_id": "TEST_HOST_E",
+    "asset_type": "hardware",
+    "asset_region": "test_env",
+    "parent_asset_unique_id": "TEST_HOST_C",
+    "parent_asset_type": "hardware"
+  },
+  {
+    "asset_unique_id": "TEST_HOST_F",
+    "asset_type": "hardware",
+    "asset_region": "test_env",
+    "parent_asset_unique_id": "TEST_HOST_C",
+    "parent_asset_type": "hardware"
+  },
+  {
+    "asset_unique_id": "TEST_HOST_G",
+    "asset_type": "hardware",
+    "asset_region": "test_env",
+    "parent_asset_unique_id": "TEST_HOST_C",
+    "parent_asset_type": "hardware"
+  },
+  {
+    "asset_unique_id": "TEST_HOST_H",
+    "asset_type": "hardware",
+    "asset_region": "test_env",
+    "parent_asset_unique_id": "TEST_HOST_D",
+    "parent_asset_type": "hardware"
+  }
+]

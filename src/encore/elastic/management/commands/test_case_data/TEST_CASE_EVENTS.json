@@ -1,0 +1,337 @@
+{
+  "TCA": [
+    "Down Event will get RESOLVED while it is in NEW status.",
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 60],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+
+  "TCA2": [
+    "Down Event will get RESOLVED while it is in NEW status. [Multiple Down Events]",
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+
+  "TCB": [
+    "Down Event will get RESOLVED while it is in CREATING_TICKET status. (By default, Down Event goes from NEW to CREATING_TICKET status in 150 seconds)",
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -10, "Press Enter to release Up Event as soon as the Down Event enters the Creating Ticket status..."],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+
+  "TCB2": [
+    "Down Event will get RESOLVED while it is in CREATING_TICKET status. [Multiple Down Events] (By default, Down Event goes from NEW to CREATING_TICKET status in 150 seconds)",
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -10, "Press Enter to release Up Event as soon as the Down Event enters the Creating Ticket status..."],
+    ["TEST_HOST_b", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+
+  "TCC": [
+    "Event will get RESOLVED after getting ALERTED.",
+    ["TEST_HOST_A", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -200, "Press Enter to release Up event if the Down event is Alerted."],
+    ["TEST_HOST_A", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+
+  "TCC2": [
+    "Event will get RESOLVED after getting ALERTED. [Multiple Down Events]",
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -100, "Press Enter to release Up event if the Down event is Alerted."],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+
+  "TCD": [
+    "Parent Child Events that get Alerted and then Resolved. [Parent Event Down before Child Event][Parent Event Resolved before Child Event]",
+    ["TEST_HOST_D", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_H", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -150, "Press Enter to release Up event if the Down event is Alerted."],
+    ["TEST_HOST_D", "TESTCASE", "up", "OK", "CPU Usage OK", 60],
+    ["TEST_HOST_H", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+
+  "TCD2": [
+    "Parent Child Events that get Alerted and then Resolved. [Parent Event Down before Child Event][Child Event Resolved before Parent Event]",
+    ["TEST_HOST_D", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_H", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -150, "Press Enter to release Up event if the Down event is Alerted."],
+    ["TEST_HOST_H", "TESTCASE", "up", "OK", "CPU Usage OK", 60],
+    ["TEST_HOST_D", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+
+  "TCD3": [
+    "Parent Child Events that get Alerted and then Resolved. [Child Event Down before Parent Event][Parent Event Resolved before Child Event]",
+    ["TEST_HOST_H", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_D", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -150, "Press Enter to release Up event if the Down event is Alerted."],
+    ["TEST_HOST_D", "TESTCASE", "up", "OK", "CPU Usage OK", 60],
+    ["TEST_HOST_H", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+
+  "TCD4": [
+    "Parent Child Events that get Alerted and then Resolved. [Child Event Down before Parent Event][Child Event Resolved before Parent Event]",
+    ["TEST_HOST_H", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_D", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -150, "Press Enter to release Up event if the Down event is Alerted."],
+    ["TEST_HOST_H", "TESTCASE", "up", "OK", "CPU Usage OK", 60],
+    ["TEST_HOST_D", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+
+  "TCD5": [
+    "Parent with multiple Child Events that get Alerted and then Resolved.",
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_G", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 20],
+    ["TEST_HOST_F", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -100, "Press Enter to release Up event if the Down event is Alerted and ITSM info passed."],
+    ["TEST_HOST_G", "TESTCASE", "up", "OK", "CPU Usage OK", 60],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", 25],
+    ["TEST_HOST_E", "TESTCASE", "up", "OK", "CPU Usage OK", 25],
+    ["TEST_HOST_F", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+
+  "TCE": [
+    "Multi level Parent Child Events that get Alerted and then Resolved. (Random 1)",
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_D", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_H", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -10],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_b", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_D", "TESTCASE", "up", "OK", "CPU Usage OK", 100],
+    ["TEST_HOST_H", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+
+  "TCE2": [
+    "Multi level Parent Child Events that get Alerted and then Resolved. (Random 2)",
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 30],
+    ["TEST_HOST_D", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_F", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_H", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -10],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_b", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_D", "TESTCASE", "up", "OK", "CPU Usage OK", 100],
+    ["TEST_HOST_E", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_F", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_H", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+  
+  "TCE3": [
+    "Multi level Parent Child Events that get Alerted and then Resolved. (Random 3)",
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 30],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_D", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_F", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_H", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -120],
+    ["TEST_HOST_E", "TESTCASE", "up", "OK", "CPU Usage OK", 0],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_F", "TESTCASE", "up", "OK", "CPU Usage OK", 0],
+    ["TEST_HOST_b", "TESTCASE", "up", "OK", "CPU Usage OK", -200],
+    ["TEST_HOST_D", "TESTCASE", "up", "OK", "CPU Usage OK", 100],
+    ["TEST_HOST_H", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+
+
+
+  "TCG": [
+    "Test Case G",
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 30],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -10],
+    ["TEST_HOST_b", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", -100]
+  ],
+  "TCG2": [
+    "Test Case G2",
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 30],
+    ["TEST_HOST_D", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_F", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_H", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -10],
+    ["TEST_HOST_b", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_E", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_F", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_D", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_H", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+  "TCG3": [
+    "Test Case G3",
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 30],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_F", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -10],
+    ["TEST_HOST_b", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", -10],
+    ["TEST_HOST_E", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_F", "TESTCASE", "up", "OK", "CPU Usage OK", 10]
+  ],
+  "TCH": [
+    "Test Case H",
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 30],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_D", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_H", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -200],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_b", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_D", "TESTCASE", "up", "OK", "CPU Usage OK", 100],
+    ["TEST_HOST_H", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+  "TCH2": [
+    "Test Case H2",
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 30],
+    ["TEST_HOST_D", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_F", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_H", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_E", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_F", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_D", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_H", "TESTCASE", "up", "OK", "CPU Usage OK", 0],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_b", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+  "TCH3": [
+    "Test Case H3",
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 30],
+    ["TEST_HOST_D", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_F", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_H", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_b", "TESTCASE", "up", "OK", "CPU Usage OK", -30],
+    ["TEST_HOST_E", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_F", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_D", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_H", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+  "TCI": [
+    "Test Case I",
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 30],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_D", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_H", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -200],
+    ["TEST_HOST_b", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_D", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_H", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+  "TCI2": [
+    "Test Case I2",
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 30],
+    ["TEST_HOST_D", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_F", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_H", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_E", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_D", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_H", "TESTCASE", "up", "OK", "CPU Usage OK", 0],
+    ["TEST_HOST_F", "TESTCASE", "up", "OK", "CPU Usage OK", -10],
+    ["TEST_HOST_b", "TESTCASE", "up", "OK", "CPU Usage OK", -50],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+  "TCI3": [
+    "Test Case I3",
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 30],
+    ["TEST_HOST_D", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_F", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_b", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_H", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 10],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -150],
+    ["TEST_HOST_b", "TESTCASE", "up", "OK", "CPU Usage OK", -30],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_E", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_F", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_D", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_H", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+  "TCJ": [
+    "Test Case J",
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 300],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -10],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+  "TCJ2": [
+    "Test Case J2",
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_F", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 30],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_G", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", -270],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", -100],
+    ["TEST_HOST_E", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_F", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_G", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ],
+  "TCJ3": [
+    "Test Case J3",
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_F", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_E", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 3],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 30],
+    ["TEST_HOST_C", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 0],
+    ["TEST_HOST_G", "TESTCASE", "down", "CRITICAL", "CPU Usage CRITICAL", 270],
+    ["TEST_HOST_E", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_F", "TESTCASE", "up", "OK", "CPU Usage OK", 10],
+    ["TEST_HOST_G", "TESTCASE", "up", "OK", "CPU Usage OK", -150],
+    ["TEST_HOST_C", "TESTCASE", "up", "OK", "CPU Usage OK", 0]
+  ]
+}
