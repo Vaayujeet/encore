@@ -64,7 +64,7 @@ class Migration(migrations.Migration):
                 (
                     "wait_time_in_seconds",
                     models.PositiveSmallIntegerField(
-                        default=300, help_text="Time (in seconds) to wait before raising a ITSM ticket for this event."
+                        default=150, help_text="Time (in seconds) to wait before raising a ITSM ticket for this event."
                     ),
                 ),
                 (
