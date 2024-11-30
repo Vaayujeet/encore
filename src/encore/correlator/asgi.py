@@ -1,5 +1,5 @@
 """
-ASGI config for correlator project.
+ASGI config for encore project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

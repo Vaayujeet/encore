@@ -163,9 +163,11 @@ cython_debug/
 
 # VSCode
 .vscode
+!/.env
 
 # Local Docker Setup
 .redis-data
+!/docker/.env
 
 # Local Docs
 /bkp
