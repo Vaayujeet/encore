@@ -102,7 +102,7 @@ Our Dockerized setup packages all necessary components, including:
 
 4. **Access Encore Services**:
 
-   - **Encore App**: <http://localhost:8000/admin/>{:target="_blank"}
+   - **Encore App**: <http://localhost:8000/admin/>
    - **Kibana (for Elasticsearch visualization)**: <http://localhost:5601>
    - **GLPI (for ticket management)**: <http://localhost:30080>
 
