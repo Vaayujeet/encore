@@ -1,5 +1,3 @@
-version: "2.2"
-
 services:
   # ELK
   setup:
@@ -233,11 +231,8 @@ services:
       - ../src/encore:/mnt/application/encore:delegated
       - ../docker/scripts:/mnt/application/scripts:delegated
       # - ../glpi:/mnt/application/glpi:delegated
-    environment:
-      - ELASTIC_CONTAINER=True
-      - GLPI_CONTAINER=True
-      - DEBUG_APP=True
-      - MIB_SOURCE_DIRECTORY=/mnt/application/encore/mibs
+    env_file:
+      - ./encore.env
     depends_on:
       es01:
         condition: service_healthy

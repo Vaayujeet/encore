@@ -2,8 +2,6 @@
 
 from pydantic_settings import BaseSettings
 
-from .base import ELASTIC_CONTAINER
-
 
 class ElasticSettings(BaseSettings):
     """Elastic Settings class
@@ -43,7 +41,3 @@ MAIN_PIPELINE = "event-pipeline"
 MONITOR_TOOL_PIPELINE_SUFFIX = "-event-pipeline"
 DEFAULT_TOOL_NAME = "Default Tool"
 DEFAULT_TOOL_PIPELINE = DEFAULT_TOOL_NAME.lower().replace(" ", "-") + MONITOR_TOOL_PIPELINE_SUFFIX
-
-if ELASTIC_CONTAINER:
-    USE_ELASTIC_CERT = True
-    ELASTIC_CERT_FINGERPRINT = "756c25346175cbc3b5ec35e0e86b240782547f29439677d425a693510b4f3502"

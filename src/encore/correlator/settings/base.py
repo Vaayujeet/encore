@@ -8,14 +8,9 @@ class BasicSettings(BaseSettings):
     Will use values from env variables else the default values.
     """
 
-    ELASTIC_CONTAINER: bool = False
-    GLPI_CONTAINER: bool = False
-
 
 base_settings = BasicSettings()
 
-ELASTIC_CONTAINER = base_settings.ELASTIC_CONTAINER
-GLPI_CONTAINER = base_settings.GLPI_CONTAINER
 
 SHELL_PLUS_IMPORTS = [
     "from elastic.constants import EventType, EventStatus, ACTIVE_EVENT_STATUS, COMPLETE_EVENT_STATUS,"
