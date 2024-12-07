@@ -49,7 +49,7 @@ Our Dockerized setup packages all necessary components, including:
 
    - **ElasticSearch**
 
-     - Update Elasticsearch Certificate Fingerprint in the `docker\encore.env` file. Elasticsearch Certificate Fingerprint can be obtained by executing bellow command from Encore/ELK container shell.
+     - Update Elasticsearch Certificate Fingerprint in the [`docker\encore.env`](../docker/encore.env) file. Elasticsearch Certificate Fingerprint can be obtained by executing bellow command from Encore/ELK container shell.
 
      ```bash
      openssl s_client -connect es01:9200 -showcerts </dev/null 2>/dev/null | openssl x509 -noout -fingerprint -sha256 | sed 's/.*=//'
@@ -70,7 +70,7 @@ Our Dockerized setup packages all necessary components, including:
        - MYSQL_DATABASE = glpidb
      - GLPI_APP_TOKEN can be set in GLPI: Home -> Setup -> General -> API (Set Enable Rest API: Yes) -> [Select or Add API Client: full access from anywhere] -> Application token. Also, update `IPv4 address range start` and `IPv4 address range end` to `0.0.0.0` or blank or any valid value.
      - GLPI_API_TOKEN can be set for a user in GLPI: Home -> Administration -> [Select User: glpi] -> Remote access keys -> API token
-     - Update GLPI_APP_TOKEN and GLPI_API_TOKEN in the `docker\encore.env` file.
+     - Update GLPI_APP_TOKEN and GLPI_API_TOKEN in the [`docker\encore.env`](../docker/encore.env) file.
 
    - **Encore**:
 
@@ -102,7 +102,7 @@ Our Dockerized setup packages all necessary components, including:
 
 4. **Access Encore Services**:
 
-   - **Encore App**: <http://localhost:8000/admin/>
+   - **Encore App**: <http://localhost:8000/admin/>{:target="_blank"}
    - **Kibana (for Elasticsearch visualization)**: <http://localhost:5601>
    - **GLPI (for ticket management)**: <http://localhost:30080>
 
@@ -131,7 +131,7 @@ Our Dockerized setup packages all necessary components, including:
 
 ### ⚙️ Configuring Existing Infrastructure
 
-If you already have ELK, PostgreSQL, Redis, or GLPI installed in your environment, you can configure Encore to use these existing services. Update the Django environment variables in the `docker\encore.env` file to connect to your infrastructure. Also, comment out the unwanted services from the `docker\docker-compose.yml` file.
+If you already have ELK, PostgreSQL, Redis, or GLPI installed in your environment, you can configure Encore to use these existing services. Update the Django environment variables in the [`docker\encore.env`](../docker/encore.env) file to connect to your infrastructure. Also, comment out the unwanted services from the [`docker\docker-compose.yml`](../docker/docker-compose.yml) file.
 
 ```properties
 # ###### ELK Settings ######
