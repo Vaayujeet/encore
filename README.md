@@ -38,9 +38,9 @@ Although Encore is still under active development, we have delivered a **Minimum
 
 ## 🚀 Getting Started
 
-Encore is designed to meet the needs of **large enterprises and organizations** managing complex infrastructures, but it’s flexible enough to support **small-scale projects** as well.
+Encore is designed to address the needs of **large enterprises and organizations** managing complex infrastructures, while maintaining the flexibility to support **small-scale projects** as well.
 
-**Wanna try out Encore?** [See how easy it is to setup Encore locally and explore](./docs/setting-up-encore-locally.md)
+**Interested in trying Encore?** Learn how easy it is to [set up Encore locally](./docs/setting-up-encore-locally.md) and explore its capabilities.
 
 ## 🔄 Workflow Overview
 
@@ -68,7 +68,7 @@ Encore is designed to meet the needs of **large enterprises and organizations** 
 - **Ticket Management**: GLPI (default, pluggable with alternatives)
 - **Containerization**: Docker and Docker Compose
 
-Like GPLI, even Elasticsearch, PostgreSQL and Redis could be pluggable with alternatives. We are currently not working on those alternatives, unless there is a strong requirement.
+Like GPLI, Elasticsearch, PostgreSQL, and Redis could also be made pluggable with alternatives. However, we are not currently working on these alternatives unless there is a strong requirement.
 
 ## 🏗️ Roadmap
 
@@ -86,7 +86,7 @@ We welcome contributions! Here’s how you can help:
 - Develop new modules for storage or ticketing integration.
 - Optimize event processing pipelines.
 - Expand documentation and examples.
-- **Extend Encore's features with your unique idea.**
+- **Enhance Encore's features with your unique ideas.**
 
 Fork the repository and submit a pull request to share your contributions.
 
