@@ -17,6 +17,7 @@
     - [5. Test the Setup](#5-test-the-setup)
     - [⚙️ Configuring Existing Infrastructure](#️-configuring-existing-infrastructure)
   - [🧭 Next Step - Explore](#-next-step---explore)
+  - [About Encore](#about-encore)
 
 ---
 
@@ -235,5 +236,13 @@ REDIS_DB_NO=0
 ## 🧭 Next Step - Explore
 
 Now that you’ve set up Encore, let’s explore its features and see how it can optimize event processing and incident management for your projects!
+
+---
+
+## About Encore
+
+Encore is a product of **Vaayujeet Software Solutions and Services**, dedicated to delivering scalable and efficient tools for enterprise-grade event correlation and incident management.
+
+We are committed to enhancing Encore’s capabilities and welcome your feedback. Contact us at [encore.support@vaayujeet.com](mailto:encore.support@vaayujeet.com) for assistance or collaboration inquiries.
 
 ---

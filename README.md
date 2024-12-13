@@ -19,7 +19,7 @@ The platform supports integration with **ELK**, **GLPI**, **PostgreSQL**, and **
   - [🏗️ Roadmap](#️-roadmap)
   - [🏆 Contributing](#-contributing)
   - [📜 License](#-license)
-  - [📬 Contact Us](#-contact-us)
+  - [📬 About Us](#-about-us)
 
 ---
 
@@ -152,7 +152,9 @@ Encore is licensed under the [AGPL-3.0 license](https://github.com/Vaayujeet/enc
 
 ---
 
-## 📬 Contact Us
+## 📬 About Us
+
+Encore is proudly developed by **Vaayujeet Software Solutions and Services**, a trusted provider of innovative software solutions designed to empower enterprises with efficient tools for operational excellence.
 
 We’d love to hear from you! Whether you have questions, feedback, or need assistance, feel free to reach out:
 
@@ -161,3 +163,5 @@ We’d love to hear from you! Whether you have questions, feedback, or need assi
 - **GitHub Issues**: Found a bug or have a feature request? Submit an issue on our [GitHub repository](https://github.com/Vaayujeet/encore/issues).
 
 We’re here to help and always looking for ways to improve Encore!
+
+---
