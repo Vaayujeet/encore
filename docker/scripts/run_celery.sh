@@ -1,4 +1,7 @@
 #!/bin/sh
+
+/mnt/application/scripts/one_time_django.sh
+
 celery -A correlator beat -l info &
 celery -A correlator worker -l info &
 python manage.py runserver 0.0.0.0:8000 &

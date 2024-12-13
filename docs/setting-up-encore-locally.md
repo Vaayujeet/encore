@@ -65,33 +65,34 @@ docker compose -f "docker/docker-compose.yml" up -d --build
 #### **Elasticsearch**
 
 1. Update the Elasticsearch Certificate Fingerprint in the `docker/encore.env` file.
-2. To fetch the fingerprint, run the following command (ensure you’re in `/mnt/application/encore`):
 
-   Bash:
+   - To fetch the fingerprint, run the following command (ensure you’re in `/mnt/application/encore`):
 
-   ```bash
-   fingerprint = $(docker compose -f docker/docker-compose.yml exec encore bash -c "openssl s_client -connect es01:9200 -showcerts </dev/null 2>/dev/null | openssl x509 -noout -fingerprint -sha256 | sed 's/.*=//'")
-   ```
+     Bash:
 
-   PowerShell:
+     ```bash
+     fingerprint = $(docker compose -f docker/docker-compose.yml exec encore bash -c "openssl s_client -connect es01:9200 -showcerts </dev/null 2>/dev/null | openssl x509 -noout -fingerprint -sha256 | sed 's/.*=//'")
+     ```
 
-   ```powershell
-   $fingerprint = Invoke-Command { docker compose -f docker/docker-compose.yml exec encore bash -c "openssl s_client -connect es01:9200 -showcerts </dev/null 2>/dev/null | openssl x509 -noout -fingerprint -sha256 | sed 's/.*=//'" }
-   ```
+     PowerShell:
 
-3. Update the `docker/encore.env` file to include the fingerprint:
+     ```powershell
+     $fingerprint = Invoke-Command { docker compose -f docker/docker-compose.yml exec encore bash -c "openssl s_client -connect es01:9200 -showcerts </dev/null 2>/dev/null | openssl x509 -noout -fingerprint -sha256 | sed 's/.*=//'" }
+     ```
 
-   Bash:
+   - Update the `docker/encore.env` file to include the fingerprint:
 
-   ```bash
-   sed -i "s/ELASTIC_CERT_FINGERPRINT=[^ ]*/ELASTIC_CERT_FINGERPRINT=$fingerprint/" docker/encore.env
-   ```
+     Bash:
 
-   PowerShell:
+     ```bash
+     sed -i "s/ELASTIC_CERT_FINGERPRINT=[^ ]*/ELASTIC_CERT_FINGERPRINT=$fingerprint/" docker/encore.env
+     ```
 
-   ```powershell
-   (Get-Content .\docker\encore.env) -replace "ELASTIC_CERT_FINGERPRINT=.*", "ELASTIC_CERT_FINGERPRINT=$fingerprint" | Set-Content .\docker\encore.env
-   ```
+     PowerShell:
+
+     ```powershell
+     (Get-Content .\docker\encore.env) -replace "ELASTIC_CERT_FINGERPRINT=.*", "ELASTIC_CERT_FINGERPRINT=$fingerprint" | Set-Content .\docker\encore.env
+     ```
 
 #### **GLPI**
 
@@ -142,46 +143,10 @@ docker compose -f "docker/docker-compose.yml" up -d --build
 
 #### **Encore**
 
-1. Connect to the Encore container shell:
+1. Execute one-time Setup and Restart the Encore container:
 
    ```bash
-   docker compose -f docker/docker-compose.yml exec encore bash
-   ```
-
-2. Execute the following commands in the shell (ensure you’re in `/mnt/application/encore`):
-
-   - **Database Deployment**:
-
-     ```bash
-     python manage.py migrate
-     ```
-
-   - **Create a Superuser**:
-
-     ```bash
-     export DJANGO_SUPERUSER_PASSWORD="correlator"
-     python manage.py createsuperuser --username correlator --email admin@encore.com --noinput
-     ```
-
-   - **Set Django Site Domain**:
-
-     ```bash
-     python manage.py shell_plus <<EOF
-     s = Site.objects.first()
-     s.domain = "localhost"
-     s.save()
-     EOF
-     ```
-
-   - **Exit Encore container shell**:
-
-     ```bash
-     exit
-     ```
-
-3. Restart the Encore container:
-
-   ```bash
+   docker compose -f docker/docker-compose.yml exec encore bash -c /mnt/application/scripts/one_time_django.sh
    docker compose -f docker/docker-compose.yml restart encore
    ```
 
@@ -197,7 +162,7 @@ Optional services:
 
 | **Service**                | **URL**                                        | **Login Settings**                                 | **User**   | **Password** |
 | -------------------------- | ---------------------------------------------- | -------------------------------------------------- | ---------- | ------------ |
-| Adminer (DB Admin)         | [http://localhost:8080](http://localhost:8080) | System: *postgreSQL*, Server: *pgdb*, DB: *encore* | correlator | correlator   |
+| Adminer (DB Admin)         | [http://localhost:8080](http://localhost:8080) | System: _postgreSQL_, Server: _pgdb_, DB: _encore_ | correlator | correlator   |
 | Flower (Celery Monitoring) | [http://localhost:5555](http://localhost:5555) |                                                    |            |              |
 
 ### 5. Test the Setup
