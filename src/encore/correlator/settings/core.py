@@ -29,7 +29,7 @@ class CoreSettings(BaseSettings):
     STATIC_ROOT: Optional[str] = None
 
     USE_POSTGRES: bool = True
-    PG_DB_NAME: str = "ecorr"
+    PG_DB_NAME: str = "encore"
     PG_DB_USER: str = "correlator"
     PG_DB_PWD: str = "correlator"
     PG_DB_HOST: str = "pgdb"

@@ -6,9 +6,19 @@
   - [Table of Contents](#table-of-contents)
   - [🌟 Scalable for Enterprises, Accessible for Small Projects](#-scalable-for-enterprises-accessible-for-small-projects)
   - [🛠️ Try Encore Locally with Docker](#️-try-encore-locally-with-docker)
-    - [🐳 Steps to Set Up Locally](#-steps-to-set-up-locally)
+  - [🐳 Steps to Set Up Encore Locally](#-steps-to-set-up-encore-locally)
+    - [1. Clone the Repository](#1-clone-the-repository)
+    - [2. Run Docker Compose](#2-run-docker-compose)
+    - [3. Perform One-Time Setup](#3-perform-one-time-setup)
+      - [**Elasticsearch**](#elasticsearch)
+      - [**GLPI**](#glpi)
+      - [**Encore**](#encore)
+    - [4. Access Encore Services](#4-access-encore-services)
+    - [5. Test the Setup](#5-test-the-setup)
     - [⚙️ Configuring Existing Infrastructure](#️-configuring-existing-infrastructure)
   - [🧭 Next Step - Explore](#-next-step---explore)
+
+---
 
 ## 🌟 Scalable for Enterprises, Accessible for Small Projects
 
@@ -20,6 +30,8 @@ To make it easy to explore and understand Encore’s capabilities, we offer a **
 - Testing configurations before deploying to production.
 - Experimenting with custom rules and integrations.
 
+---
+
 ## 🛠️ Try Encore Locally with Docker
 
 Our Dockerized setup packages all necessary components, including:
@@ -29,68 +41,131 @@ Our Dockerized setup packages all necessary components, including:
 - **Redis** as the message broker.
 - **GLPI** for ticket management.
 
-### 🐳 Steps to Set Up Locally
+---
 
-1. **Clone the Repository**:
+## 🐳 Steps to Set Up Encore Locally
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Vaayujeet/encore.git
+cd encore
+```
+
+### 2. Run Docker Compose
+
+Build and start the application using Docker Compose:
+
+```bash
+docker compose -f "docker/docker-compose.yml" up -d --build
+```
+
+### 3. Perform One-Time Setup
+
+#### **Elasticsearch**
+
+1. Update the Elasticsearch Certificate Fingerprint in the `docker/encore.env` file.
+2. To fetch the fingerprint, run the following command (ensure you’re in `/mnt/application/encore`):
+
+   Bash:
 
    ```bash
-   git clone https://github.com/Vaayujeet/encore.git
-   cd encore
+   fingerprint = $(docker compose -f docker/docker-compose.yml exec encore bash -c "openssl s_client -connect es01:9200 -showcerts </dev/null 2>/dev/null | openssl x509 -noout -fingerprint -sha256 | sed 's/.*=//'")
    ```
 
-2. **Run Docker Compose**:  
-   Build and start the application using Docker Compose:
+   PowerShell:
+
+   ```powershell
+   $fingerprint = Invoke-Command { docker compose -f docker/docker-compose.yml exec encore bash -c "openssl s_client -connect es01:9200 -showcerts </dev/null 2>/dev/null | openssl x509 -noout -fingerprint -sha256 | sed 's/.*=//'" }
+   ```
+
+3. Update the `docker/encore.env` file to include the fingerprint:
+
+   Bash:
 
    ```bash
-   docker compose -f "docker\docker-compose.yml" up -d --build
+   sed -i "s/ELASTIC_CERT_FINGERPRINT=[^ ]*/ELASTIC_CERT_FINGERPRINT=$fingerprint/" docker/encore.env
    ```
 
-3. **Perform One time Setup**
+   PowerShell:
 
-   - **ElasticSearch**
+   ```powershell
+   (Get-Content .\docker\encore.env) -replace "ELASTIC_CERT_FINGERPRINT=.*", "ELASTIC_CERT_FINGERPRINT=$fingerprint" | Set-Content .\docker\encore.env
+   ```
 
-     - Update Elasticsearch Certificate Fingerprint in the [`docker\encore.env`](../docker/encore.env) file. Elasticsearch Certificate Fingerprint can be obtained by executing bellow command from Encore/ELK container shell.
+#### **GLPI**
+
+1. Open [http://localhost:30080](http://localhost:30080) and [Set up GLPI](https://glpi-install.readthedocs.io/en/latest/install/wizard.html) with the following configurations:
+
+   - **SQL Server**: `mysql`
+   - **MYSQL_USER**: `glpi-user`
+   - **MYSQL_PASSWORD**: `glpi-pass`
+   - **MYSQL_DATABASE**: `glpidb`
+
+   Note the default user accounts / passwords created.
+
+2. Configure API tokens:
+
+   GLPI Admin user/password is `glpi`/`glpi`.
+
+   - **GLPI_APP_TOKEN**:
+     - Navigate to **Home -> Setup -> General -> API**.
+     - Enable "REST API" and click Save.
+     - Add an API client with full access and regenerate/copy the "Application token".
+     - Also, update `IPv4 address range start` and `IPv4 address range end` to `0.0.0.0` or blank or any valid value.
+     - Save changes.
+   - **GLPI_API_TOKEN**:
+     - Navigate to **Home -> Administration -> Users**.
+     - Select a user (e.g., `glpi`) and configure the API token under "Remote Access Keys".
+
+3. Update the `GLPI_APP_TOKEN` and `GLPI_API_TOKEN` in the `docker/encore.env` file.
+
+   Bash:
+
+   ```bash
+   glpi_app_token = "app-token-from-above-step"
+   glpi_api_token = "api-token-from-above-step"
+
+   sed -i -e "s/GLPI_APP_TOKEN=[^ ]*/GLPI_APP_TOKEN=$glpi_app_token/" -e "s/GLPI_API_TOKEN=[^ ]*/GLPI_API_TOKEN=$glpi_api_token/" docker/encore.env
+   ```
+
+   PowerShell:
+
+   ```powershell
+   $glpi_app_token = "app-token-from-above-step"
+   $glpi_api_token = "api-token-from-above-step"
+
+   (Get-Content .\docker\encore.env) `
+      -replace "GLPI_APP_TOKEN=.*", "GLPI_APP_TOKEN=$glpi_app_token" `
+      -replace "GLPI_API_TOKEN=.*", "GLPI_API_TOKEN=$glpi_api_token" | Set-Content .\docker\encore.env
+   ```
+
+#### **Encore**
+
+1. Connect to the Encore container shell:
+
+   ```bash
+   docker compose -f docker/docker-compose.yml exec encore bash
+   ```
+
+2. Execute the following commands in the shell (ensure you’re in `/mnt/application/encore`):
+
+   - **Database Deployment**:
 
      ```bash
-     openssl s_client -connect es01:9200 -showcerts </dev/null 2>/dev/null | openssl x509 -noout -fingerprint -sha256 | sed 's/.*=//'
-     ```
-
-     - Command to connect Encore container shell
-
-     ```bash
-     docker compose -f docker\docker-compose.yml exec encore bash
-     ```
-
-   - **GLPI**
-
-     - Setup GLPi for the first time
-       - SQL Server = mysql
-       - MYSQL_USER = glpi-user
-       - MYSQL_PASSWORD = glpi-pass
-       - MYSQL_DATABASE = glpidb
-     - GLPI_APP_TOKEN can be set in GLPI: Home -> Setup -> General -> API (Set Enable Rest API: Yes) -> [Select or Add API Client: full access from anywhere] -> Application token. Also, update `IPv4 address range start` and `IPv4 address range end` to `0.0.0.0` or blank or any valid value.
-     - GLPI_API_TOKEN can be set for a user in GLPI: Home -> Administration -> [Select User: glpi] -> Remote access keys -> API token
-     - Update GLPI_APP_TOKEN and GLPI_API_TOKEN in the [`docker\encore.env`](../docker/encore.env) file.
-
-   - **Encore**:
-
-     - Connect to Encore container shell
-
-     ```bash
-     docker compose -f docker\docker-compose.yml exec encore bash
-     ```
-
-     - Execute below commands in the shell (you should be in the `/mnt/application/encore` directory).
-
-     ```bash
-     # Database deployment
      python manage.py migrate
+     ```
 
-     # Create a super user to manage the Encore Admin site
+   - **Create a Superuser**:
+
+     ```bash
      export DJANGO_SUPERUSER_PASSWORD="correlator"
      python manage.py createsuperuser --username correlator --email admin@encore.com --noinput
+     ```
 
-     # Set the Django Site domain.
+   - **Set Django Site Domain**:
+
+     ```bash
      python manage.py shell_plus <<EOF
      s = Site.objects.first()
      s.domain = "localhost"
@@ -98,40 +173,62 @@ Our Dockerized setup packages all necessary components, including:
      EOF
      ```
 
-     - Restart the Encore container
+   - **Exit Encore container shell**:
 
-4. **Access Encore Services**:
+     ```bash
+     exit
+     ```
 
-   - **Encore App**: <http://localhost:8000/admin/>
-   - **Kibana (for Elasticsearch visualization)**: <http://localhost:5601>
-   - **GLPI (for ticket management)**: <http://localhost:30080>
-
-5. **Optional services for administration/monitoring**
-
-   - **Adminer**: <http://localhost:8080> (for Postgres/MySQL administration)
-   - **Flower**: <http://localhost:5555> (for Celery monitoring)
-
-6. **Test if everything is working**
-
-   - Monitor in Kibana
-
-   - Connect to Encore container shell once again
+3. Restart the Encore container:
 
    ```bash
-   docker compose -f docker\docker-compose.yml exec encore bash
+   docker compose -f docker/docker-compose.yml restart encore
    ```
 
-   - Execute below commands in the shell (you should be in the `/mnt/application/encore` directory).
+### 4. Access Encore Services
+
+| **Service**              | **URL**                                                      | **User**   | **Password** |
+| ------------------------ | ------------------------------------------------------------ | ---------- | ------------ |
+| Encore Admin Panel       | [http://localhost:8000/admin/](http://localhost:8000/admin/) | correlator | correlator   |
+| Kibana (Elasticsearch)   | [http://localhost:5601](http://localhost:5601)               | elastic    | correlator   |
+| GLPI (Ticket Management) | [http://localhost:30080](http://localhost:30080)             | glpi       | glpi         |
+
+Optional services:
+
+| **Service**                | **URL**                                        | **Login Settings**                                 | **User**   | **Password** |
+| -------------------------- | ---------------------------------------------- | -------------------------------------------------- | ---------- | ------------ |
+| Adminer (DB Admin)         | [http://localhost:8080](http://localhost:8080) | System: *postgreSQL*, Server: *pgdb*, DB: *encore* | correlator | correlator   |
+| Flower (Celery Monitoring) | [http://localhost:5555](http://localhost:5555) |                                                    |            |              |
+
+### 5. Test the Setup
+
+1. Connect to the Encore container shell:
+
+   ```bash
+   docker compose -f docker/docker-compose.yml exec encore bash
+   ```
+
+2. Run the test case to verify event correlation:
 
    ```bash
    python manage.py test_case tca
    ```
 
-   - This should create a Down event and then later an Up event which eventually gets linked to the Down event and ultimately both events are resolved.
+3. **Expected Output**:
+
+   - A "Down" event is created.
+   - An "Up" event is linked to the "Down" event.
+   - Both events are resolved automatically.
+
+4. Monitor events in **Kibana** to verify the setup.
+
+---
 
 ### ⚙️ Configuring Existing Infrastructure
 
-If you already have ELK, PostgreSQL, Redis, or GLPI installed in your environment, you can configure Encore to use these existing services. Update the Django environment variables in the [`docker\encore.env`](../docker/encore.env) file to connect to your infrastructure. Also, comment out the unwanted services from the [`docker\docker-compose.yml`](../docker/docker-compose.yml) file.
+If you already have ELK, PostgreSQL, Redis, or GLPI installed, you can configure Encore to use these services. Update the Django environment variables in the [`docker/encore.env`](../docker/encore.env) file and comment out the corresponding services in the [`docker/docker-compose.yml`](../docker/docker-compose.yml) file.
+
+Example configurations for `docker/encore.env`:
 
 ```properties
 # ###### ELK Settings ######
@@ -168,6 +265,10 @@ REDIS_DB_NO=0
 
 ```
 
+---
+
 ## 🧭 Next Step - Explore
 
-Now that you have setup Encore, lets explore it's features.
+Now that you’ve set up Encore, let’s explore its features and see how it can optimize event processing and incident management for your projects!
+
+---
