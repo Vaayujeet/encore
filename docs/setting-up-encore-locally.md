@@ -188,6 +188,16 @@ Optional services:
 
 4. Monitor events in **Kibana** to verify the setup.
 
+   - Create a `Data View` in `Home` -> `Analytics` -> `Discover` to monitor events [Index Pattern = `events-*`].
+
+**_Image: Running command `python manage.py test_case tca`_**
+
+![Running command `python manage.py test_case tca`](images/encore-testcase-tca.png)
+
+**_Image: Monitor events in Kibana_**
+
+![Monitor events in Kibana](images/kibana-testcase-tca.png)
+
 ---
 
 ### ⚙️ Configuring Existing Infrastructure
