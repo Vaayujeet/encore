@@ -247,6 +247,14 @@ REDIS_DB_NO=0
 
 Now that you’ve set up Encore, let’s explore its features and see how it can optimize event processing and incident management for your projects!
 
+- Asset Mapping
+  - Parent Child Relation
+- Ingestion Pipeline Rules
+- Correlation Rules
+  - Event Level Sub Rules
+- GLPI Tickets
+- SNMP Events
+
 ---
 
 ## About Encore
